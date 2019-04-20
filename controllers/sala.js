@@ -16,6 +16,15 @@ var obterSalas = ( callback) => {
 
 };
 
+
+var obterSalaByNome = (nomeSala, callback) => {
+	console.log(nomeSala)
+	db.all(`SELECT * from sala where nome_sala = "${nomeSala}"`, (err, results) => {
+		callback(results);  
+	});
+
+};
+
 var obterSalaById = (idSala, callback) => {
 
 	db.all(`SELECT * from sala where id = ${idSala}`, (err, results) => {
@@ -28,4 +37,5 @@ module.exports = {
 	cadastrarSala:cadastrarSala,
 	obterSalas:obterSalas,
 	obterSalaById:obterSalaById,
+	obterSalaByNome:obterSalaByNome
 }

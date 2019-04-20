@@ -51,6 +51,22 @@ router.get('/sala/obter-salas', (req, res) => {
     
 })
 
+router.get('/sala/obter-sala/:nomeSala', (req, res) => {
+
+    const nomeSala = req.params.nomeSala
+      
+    salaController.obterSalaByNome(nomeSala, function (data) {
+       if(!data.length >= 1){
+        salaController.cadastrarSala(nomeSala, function (data) {
+            res.status(201).json(data);
+        })
+       }else{
+        res.status(200).json(data);
+       }
+    })    
+    
+})
+
 router.get('/sala/obter-sala/:id', (req, res) => {
 
     const idSala = req.params.id
