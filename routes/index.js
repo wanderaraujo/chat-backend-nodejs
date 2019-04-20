@@ -28,6 +28,24 @@ router.post('/usuario/novo-usuario', (req, res) => {
     
 })
 
+router.patch('/usuario/status', (req, res) => {
+  
+    const usuario = {
+        id: req.body.id_usuario,
+        status: req.body.status
+    }
+
+    if (!(usuario.id_usuario || usuario.status )) {
+        res.status(400).json({ erro: "Necesário informar todos os campos do usuário!" });
+    }else{
+        
+        usuarioController.alterarStatusUsuario(usuario, function (data) {
+            res.status(201).json(data);
+        })
+    }
+    
+})
+
 router.post('/sala/nova-sala', (req, res) => {
   
     const nomeSala = req.body.nome

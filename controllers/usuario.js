@@ -14,14 +14,19 @@ var obterUsuarios = (usuario, callback) => {
 	});
 };
 
-var obterUsuarioById = (usuario, callback) => {
-	
-	callback(db.run(`INSERT INTO usuario (nome, nickname)VALUES("${usuario.nome}", "${usuario.nickname}");`))
-	db.close();
+var obterUsuarioById = (usuarioId, callback) => {
+	db.all(`SELECT * from usuario where id_sala = ${usuarioId}`, (err, results) => {
+        callback(results);  
+	});
+};
+
+var alterarStatusUsuario = (usuario, callback) => {
+	callback(db.run(`UPDATE usuario SET online = ${usuario.status} WHERE id = ${usuario.id_usuario};);`))
 };
 
 module.exports = {
 	cadastrarUsuario:cadastrarUsuario,
 	obterUsuarios:obterUsuarios,
-	obterUsuarioById:obterUsuarioById
+	obterUsuarioById:obterUsuarioById,
+	alterarStatusUsuario:alterarStatusUsuario
 }
