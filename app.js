@@ -5,10 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+const allowCors = require('./cors')
 var db = require('./db/init');
 var index = require('./routes/index');
 
 var app = express();
+
+app.use(allowCors)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,7 +36,7 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-var port = process.env.PORT || 3000;
+var port = 3003;
 app.listen(port, function() {
   console.log(`APP backend rodando na porta ${port}.`)
 })
