@@ -20,9 +20,17 @@ router.post('/usuario/login', (req, res) => {
         res.status(400).json({ erro: "Necesário informar usuário ou nickname" });
     } else {
 
-        usuarioController.cadastrarUsuario(usuario, function (data) {
-            res.status(201).json(data);
+        usuarioController.checkUsuarioExist(usuario, function (data) {
+           
+            if (data.length >= 1) {
+                res.status(200).json(data);
+            } else {
+                usuarioController.cadastrarUsuario(usuario, function (data) {
+                    res.status(201).json(data);
+                })
+            }
         })
+
     }
 
 })
@@ -42,13 +50,18 @@ router.patch('/usuario/status', (req, res) => {
         status: req.body.status
     }
 
+    console.log('patch', usuario)
+
     if (!(usuario.id_usuario || usuario.status)) {
         res.status(400).json({ erro: "Necesário informar todos os campos do usuário!" });
     } else {
 
         usuarioController.alterarStatusUsuario(usuario, function (data) {
+            
             res.status(201).json(data);
+            
         })
+        
     }
 
 })
@@ -104,14 +117,9 @@ router.get('/sala/obter-sala/:id', (req, res) => {
 
 router.post('/mensagem/nova-mensagem', (req, res) => {
 
-
-    const mensagem = {
-        id_usuario: req.body.id_usuario,
-        id_sala: req.body.id_sala,
-        texto: req.body.texto
-    }
-
-    if (!(mensagem.id_usuario || mensagem.id_sala || mensagem.texto)) {
+    const mensagem = req.body.objMensagem
+   
+    if (!(mensagem.id_usuario || mensagem.id_sala || mensagem.texto || mensagem.data_envio)) {
         res.status(400).json({ erro: 'Necesário informar todos os campos para enviar a mensagem!' });
     } else {
 
@@ -124,7 +132,6 @@ router.post('/mensagem/nova-mensagem', (req, res) => {
 
 router.get('/mensagem/obter-todas-mensagens', (req, res) => {
 
-
     mensagemController.obterTodasMensagens(function (data) {
         res.status(200).json(data);
     })
@@ -133,18 +140,13 @@ router.get('/mensagem/obter-todas-mensagens', (req, res) => {
 
 router.get('/mensagem/obter-mensagens/:id_sala', (req, res) => {
 
-    const usuario = {
-        nome: req.body.nome,
-        nickname: req.body.nickname
-    }
+    const idSala = req.params.id_sala
 
-    if (!(usuario.nome || usuario.nickname)) {
-        res.status(400).json({ erro: "Necesário informar usuário ou nickname" });
+    if (!idSala) {
+        res.status(400).json({ erro: "Necesário informar o id da sala!" });
     } else {
-
-
-        usuarioController.cadastrarUsuario(usuario, function (data) {
-            res.status(201).json(data);
+        mensagemController.obterMensagensBySala(idSala, function (data) {
+            res.status(200).json(data);
         })
     }
 

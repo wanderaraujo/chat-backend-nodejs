@@ -26,6 +26,8 @@ db.serialize(function() {
   db.run(`CREATE TABLE IF NOT EXISTS  mensagens (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     id_usuario INTEGER,
+    nome TEXT,
+    nickname TEXT,
     id_sala INTEGER,
     texto TEXT,
     data_envio TEXT

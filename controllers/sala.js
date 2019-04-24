@@ -4,6 +4,7 @@ var db = new sqlite3.Database('./db/data-base');
 var cadastrarSala = (nomeSala, callback) => {
 	
 	db.run(`INSERT INTO sala (nome_sala) VALUES("${nomeSala}");`, (err, results) => {
+		
 		callback(results)
 	})
 };
