@@ -14,10 +14,36 @@ Durante a conversa, o usuário deverá visualizar novas mensagens enviadas e tam
 
 O usuário poderá enviar novas mensagens e também sair da conversa.
 
-### Pré-requisito 
-
+### Pré-requisito
+NPM 6^
 NodeJS V10^
 
-### Instalação
+## Instalar e executar o projeto
 
-Rodar em modo de desenvolvimento
+Fazer o donwload deste repositório, para rodar o backend da aplicaçao:
+
+### `npm i`
+
+Execute este comando dentro da pasta raiz para instalar as dependências.<br>
+
+### `npm run dev`
+
+ Execute este comando para iniciar o backend.<br>
+A aplicação chat-app [http://localhost:3003](http://localhost:3003) está rodando em modo de desenvolvimento.<br>
+
+## TODO
+
+Melhorias a serem aplicadas em uma nova versão.
+
+### Separar rotas
+
+Separar as resposnsabilidades das rotas, deixando cada rota separada em um arquivo contendo sua funcionalidade designada.
+
+### PM2 e MongoDB/MySql
+
+Instalar o PM2, caso seja necessário subir a app para produção, afim de monitorar e subir novamente a app em caso de crash. <br><br>
+Plugar algum banco de dados para armazenar as informações, pois os dados estão sendo armazenados pelo SQLITE dentro do própio projeto.
+
+
+
+
