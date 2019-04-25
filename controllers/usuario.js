@@ -32,9 +32,7 @@ var obterUsuarioById = (usuarioId, callback) => {
 var alterarStatusUsuario = (usuario, callback) => {
 	
 	db.run(`UPDATE usuario SET online = ${usuario.status} WHERE id = ${usuario.id};`)
-	db.all(`SELECT * FROM usuario WHERE online = true`, (err, results) => {
-		callback(results);
-	});
+	callback();
 };
 
 var buscarUsuariosOnline = (usuario, callback) => {

@@ -3,15 +3,15 @@ var db = new sqlite3.Database('./db/data-base');
   
 var cadastrarSala = (nomeSala, callback) => {
 	
-	db.run(`INSERT INTO sala (nome_sala) VALUES("${nomeSala}");`, (err, results) => {
-		
-		callback(results)
-	})
+	db.run(`INSERT INTO sala (nome_sala) VALUES("${nomeSala}");`)
+	db.all("SELECT * FROM sala;", (err, results) => {
+        callback(results);  
+	});
 };
 
 var obterSalas = ( callback) => {
 
-	db.all("SELECT * from sala;", (err, results) => {
+	db.all("SELECT * FROM sala;", (err, results) => {
         callback(results);  
 	});
 
@@ -19,8 +19,8 @@ var obterSalas = ( callback) => {
 
 
 var obterSalaByNome = (nomeSala, callback) => {
-	console.log(nomeSala)
-	db.all(`SELECT * from sala where nome_sala = "${nomeSala}"`, (err, results) => {
+
+	db.all(`SELECT * FROM sala WHERE nome_sala = "${nomeSala}"`, (err, results) => {
 		callback(results);  
 	});
 
@@ -28,7 +28,7 @@ var obterSalaByNome = (nomeSala, callback) => {
 
 var obterSalaById = (idSala, callback) => {
 
-	db.all(`SELECT * from sala where id = ${idSala}`, (err, results) => {
+	db.all(`SELECT * FROM sala WHERE id = ${idSala}`, (err, results) => {
         callback(results);  
 	});
 
