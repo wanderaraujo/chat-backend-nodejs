@@ -36,7 +36,7 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-var port = 3003;
+var port = process.env.PORT || 3003
 app.listen(port, function() {
   console.log(`APP backend rodando na porta ${port}.`)
 })
