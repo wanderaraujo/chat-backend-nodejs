@@ -4,6 +4,7 @@
   "description": "Endpoint para gerenciar as requisicoes do frontend web ou mobile.",
   "main": "app.js",
   "scripts": {
+    "start": "node app",
     "dev": "nodemon",
     "test": "./node_modules/.bin/mocha test"
   },
@@ -20,7 +21,7 @@
     "pusher": "^2.2.0",
     "pusher-js": "^4.4.0",
     "serve-favicon": "~2.4.2",
-    "sqlite3": "^4.0.6"
+    "sqlite3": "^4.1.0"
   },
   "devDependencies": {
     "bluebird": "^3.5.4",
